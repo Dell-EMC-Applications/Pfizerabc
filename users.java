@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 Iam from development
 >>>>>>> development
 This is the new file to write code
