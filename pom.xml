@@ -98,13 +98,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://13.233.141.166:8081/repository/pfizer-release/</url>
+	      <url>http://13.233.141.166:8081/repository/CMS-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://13.233.141.166:8081/repository/pfizer-snapshot/</url>
+	      <url>http://13.233.141.166:8081/repository/CMS-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
