@@ -1,47 +1,27 @@
-node ('nodes')
+node
 {
-
- // def mavenHome=tool name: "maven3.6.2"
-  
-  echo "I am running in slave 1"
-  
-  /*
- stage('Checkout')
- {
- 	git branch: 'development', credentialsId: 'bed5a851-d84d-412e-87e7-bf9ce23c0e0e', url: 'https://github.com/MithunTechnologiesDevOps/maven-web-application.git'
- 
- }
- 
- stage('Build')
- {
- sh  "${mavenHome}/bin/mvn clean package"
- }
- 
-  
- stage('ExecuteSoanrQubeReport')
- {
- sh  "${mavenHome}/bin/mvn sonar:sonar"
- }
- 
- stage('UploadArtifactintoNexus')
- {
- sh  "${mavenHome}/bin/mvn deploy"
- }
- 
- stage('DeployAppintoTomcat')
- {
- sshagent(['cd93d61f-2d0f-4c60-8b33-34cf4fa888b0']) {
-  sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.235.132.183:/opt/apache-tomcat-9.0.29/webapps/"
- }
- }
-
- stage('SendEmailNotification')
- {
- emailext body: '''Build is over..
-
- Regards,
- Mithun Technologies,
- 9980923226.''', subject: 'Build is over', to: 'devopstrainingblr@gmail.com'
- }
- */
+    def MavenHome = tool name: "maven3.6.3"
+    properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')), pipelineTriggers([pollSCM('* * * * *')])])
+    stage("Checkout code")
+    {
+        git branch: 'development', credentialsId: '3e8541bc-47af-4878-b4f7-900a5d99d1e6', url: 'https://github.com/Dell-EMC-Applications/Pfizerabc.git'
+    }
+    stage("Build")
+    {
+        sh "${MavenHome}/bin/mvn clean package"  
+    }
+    stage("ExecuteSonarqubeReport")
+    {
+        sh "${MavenHome}/bin/mvn sonar:sonar"
+    }
+    stage("UploadArtifact")
+    {
+        sh "${MavenHome}/bin/mvn deploy"
+    }
+    stage("DeployAppTomcat")
+    {
+        sshagent(['1421c726-3158-4e57-a9f0-10a378fca5a2']) {
+    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@52.66.211.174://opt/apache-tomcat-9.0.34/webapps/"
+}
+    }
 }
